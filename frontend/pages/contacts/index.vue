@@ -37,17 +37,18 @@ export default {
   components: {
     ContactCard,
   },
+  asyncData({ store }) {
+    store.dispatch('getContacts')
+  },
   computed: {
     contacts() {
       return this.$store.state.contacts
     },
   },
   methods: {
-    async deleteContact(e, contactId) {
+    deleteContact(e, contactId) {
       e.stopPropagation()
-      await this.$axios.$delete(`/contacts/${contactId}/`)
-      const newContacts = await this.$axios.$get('/contacts/')
-      this.contacts = newContacts
+      this.$store.dispatch('deleteContact', contactId)
     },
     editContact(e, contactId) {
       e.stopPropagation()
