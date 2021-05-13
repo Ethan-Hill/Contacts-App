@@ -23,6 +23,9 @@
 
 <script>
 export default {
+  mounted() {
+    this.$store.dispatch('getContacts')
+  },
   methods: {
     to() {
       this.$router.go(-1)

@@ -37,18 +37,10 @@ export default {
   components: {
     ContactCard,
   },
-  async asyncData({ $axios }) {
-    try {
-      const contacts = await $axios.$get(`/contacts/`)
-      return { contacts }
-    } catch (e) {
-      return { contacts: [] }
-    }
-  },
-  data() {
-    return {
-      contacts: [],
-    }
+  computed: {
+    contacts() {
+      return this.$store.state.contacts
+    },
   },
   methods: {
     async deleteContact(e, contactId) {
