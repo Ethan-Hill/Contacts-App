@@ -3,6 +3,11 @@
 This is the backend of my contacts app,
 Django-powered REST API.
 
+## Dependencies
+
+- Python3
+- pipenv
+
 ## Features
 
 - Create a contact

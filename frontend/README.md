@@ -3,6 +3,11 @@
 This is the frontend of my contacts app,
 Tailwind-styled Nuxt App.
 
+## Dependencies
+
+- Yarn
+- NodeJs v12+
+
 ## Features
 
 - Create, Update, Delete contacts
