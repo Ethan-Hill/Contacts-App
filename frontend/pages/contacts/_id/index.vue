@@ -2,7 +2,10 @@
   <main
     class="flex items-center justify-center min-h-screen bg-center bg-cover bg-backgroundColor"
   >
-    <div class="max-w-sm p-8 overflow-hidden bg-white rounded-lg shadow-lg">
+    <div
+      v-if="contact.name"
+      class="max-w-sm p-8 overflow-hidden bg-white rounded-lg shadow-lg"
+    >
       <h1 class="text-3xl font-semibold text-gray-800">{{ contact.name }}</h1>
       <div class="flex items-center mt-4 text-gray-700">
         <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512">
@@ -28,33 +31,20 @@
 
         <h1 class="px-2 text-sm">{{ contact.phone_number }}</h1>
       </div>
-      <div class="flex justify-around flex-1 w-full mt-4 lg:mt-0">
-        <div
-          class="inline-flex transition-all bg-white rounded-md shadow hover:bg-yellow-500"
-        >
-          <button
-            class="px-6 py-2 font-bold text-gray-700 hover:text-white"
-            @click="editContact($event, contact.id)"
-          >
-            Edit
-          </button>
-        </div>
-        <div
-          class="relative inline-flex transition-all bg-white rounded-md shadow hover:bg-red-500"
-        >
-          <button
-            class="px-6 py-2 font-bold text-gray-700 hover:text-white"
-            @click="deleteContact($event, contact.id)"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
+      <Options
+        :contact="contact"
+        :delete-contact="deleteContact"
+        :edit-contact="editContact"
+      />
     </div>
   </main>
 </template>
 <script>
+import Options from '../../../components/Items/Options'
 export default {
+  components: {
+    Options,
+  },
   async asyncData({ $axios, params }) {
     try {
       const contact = await $axios.$get(`/contacts/${params.id}`)
@@ -63,6 +53,7 @@ export default {
       return { contact: [] }
     }
   },
+
   data() {
     return {
       contact: {
@@ -70,6 +61,11 @@ export default {
         email: '',
         phone_number: '',
       },
+    }
+  },
+  mounted() {
+    if (!this.contact.name) {
+      this.$router.push('/contacts')
     }
   },
   methods: {
