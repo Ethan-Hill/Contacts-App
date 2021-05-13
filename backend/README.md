@@ -24,3 +24,7 @@ You can find the frontend at [this repo](https://gitlab.com/Ethan-Hill/contacts-
 ## Usage
 
 1. `python3 manage.py runserver`
+
+## Testing
+
+1. `python3 manage.py test`
