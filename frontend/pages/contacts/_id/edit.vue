@@ -100,6 +100,11 @@ export default {
       },
     }
   },
+  mounted() {
+    if (!this.contact.name) {
+      this.$router.push('/contacts')
+    }
+  },
   methods: {
     async submitNewContact() {
       const config = {
